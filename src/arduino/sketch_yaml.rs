@@ -107,7 +107,9 @@ impl<'de> Deserialize<'de> for PlatformName {
             where
                 E: serde::de::Error,
             {
-                todo!()
+                PlatformName::parse(v)
+                    .map(|(_remaining, name)| name)
+                    .map_err(|error| E::custom(error))
             }
         }
 
