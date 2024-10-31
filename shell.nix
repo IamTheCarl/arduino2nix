@@ -1,8 +1,8 @@
 { pkgs ? import <nixpkgs> { } }:
 pkgs.mkShell {
-  buildInputs = import ./build_dependencies.nix {
+  buildInputs = (import ./build_dependencies.nix {
     pkgs = pkgs;
-  };
+  }) ++ (import ./runtime_dependencies.nix { pkgs = pkgs; });
 
   # Set environment variables
   shellHook = ''
